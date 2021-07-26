@@ -1,21 +1,19 @@
 import React from 'react';
+import { useReducer } from 'react';
 import { createContext } from 'react';
-import { Todo, TodoList } from './TodoList';
+import { TodoListComponent } from './components/TodoList/TodoList';
+import { reducer, initialState, State, Action } from './reducer/reducer';
+import { Todo, TodoList } from './type/Todo';
 
-export const TodoContext = createContext<Todo[]>([])
-
-export const todoTest: Todo[] = [{
-  id: 1,
-  title: "テスト１",
-  detail: "詳細",
-  dueDate: new Date('2021-01-01').toDateString()
-}]
+type contextType = { state: State, dispatch: React.Dispatch<Action> }
+export const TodoContext = createContext({} as contextType)
 
 function App() {
+  const [state, dispatch] = useReducer(reducer, initialState)
   return (
-    <TodoContext.Provider value={todoTest}>
+    <TodoContext.Provider value={{ state, dispatch }}>
       <div className="App">
-        <TodoList />
+        <TodoListComponent />
       </div>
     </TodoContext.Provider>
   );
