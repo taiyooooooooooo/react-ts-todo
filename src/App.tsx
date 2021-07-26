@@ -1,25 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { createContext } from 'react';
+import { Todo, TodoList } from './TodoList';
+
+export const TodoContext = createContext<Todo[]>([])
+
+export const todoTest: Todo[] = [{
+  id: 1,
+  title: "テスト１",
+  detail: "詳細",
+  dueDate: new Date('2021-01-01').toDateString()
+}]
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <TodoContext.Provider value={todoTest}>
+      <div className="App">
+        <TodoList />
+      </div>
+    </TodoContext.Provider>
   );
 }
 
