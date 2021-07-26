@@ -1,7 +1,9 @@
 import React from 'react';
 import { useReducer } from 'react';
 import { createContext } from 'react';
-import { TodoListComponent } from './components/TodoList/TodoList';
+import { BrowserRouter, Route, Router } from 'react-router-dom';
+import { Add } from './components/Add';
+import { TodoListComponent } from './components/TodoList/TodoListComponent';
 import { reducer, initialState, State, Action } from './reducer/reducer';
 import { Todo, TodoList } from './type/Todo';
 
@@ -13,7 +15,12 @@ function App() {
   return (
     <TodoContext.Provider value={{ state, dispatch }}>
       <div className="App">
-        <TodoListComponent />
+        <BrowserRouter>
+          <div>
+            <Route exact path='/' component={TodoListComponent} />
+            <Route path='/Add' component={Add} />
+          </div>
+        </BrowserRouter>
       </div>
     </TodoContext.Provider>
   );
