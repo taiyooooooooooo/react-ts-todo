@@ -1,7 +1,10 @@
+import ActionAccessibility from "material-ui/svg-icons/action/accessibility";
 import { Todo } from "../type/Todo";
 
+export type Payload = { inputValue: Todo }
 export type State = { todos: Todo[] }
-export type Action = { type: "dummy" }
+export enum ActionType { ADD_ACTION = "ADD" }
+export type Action = { type: ActionType, payload: Payload }
 
 export const initialState: State = {
     todos: [{
@@ -12,8 +15,16 @@ export const initialState: State = {
     }]
 }
 
-export const reducer = (state: State, action: Action) => {
+export const reducer = (state: State, action: Action): State => {
     switch (action.type) {
+        case ActionType.ADD_ACTION:
+            const todos = state.todos.slice()
+            todos.push(action.payload.inputValue)
+
+            return {
+                ...state,
+                todos: todos
+            }
         default:
             return state
     }
