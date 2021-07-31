@@ -20,7 +20,7 @@ export const reducer = (state: State, action: Action): State => {
         case ActionType.ADD_ACTION:
             const todos = state.todos.slice()
             todos.push(action.payload.inputValue)
-
+            console.log('★★', todos, '★★')
             return {
                 ...state,
                 todos: todos

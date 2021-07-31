@@ -1,5 +1,6 @@
 import { Grid, makeStyles, TextField, Button } from "@material-ui/core"
 import React, { useContext } from "react"
+import { Link } from "react-router-dom"
 import { TodoContext } from "../App"
 import { ActionType } from "../reducer/reducer"
 
@@ -35,6 +36,9 @@ export const Add = () => {
                 }
             }
         )
+        setTitle("")
+        setDetail("")
+        setDueDate("")
     }
     return (
         <div>
@@ -43,12 +47,15 @@ export const Add = () => {
                     <Grid item xs={12} className={classes.formGrid}>
                         <TextField
                             name="title"
+                            value={title}
                             label="タスク名"
                             fullWidth={true}
                             onChange={e => setTitle(e.target.value)} />
                     </Grid>
                     <Grid item xs={12} className={classes.formGrid}>
-                        <TextField name="detail"
+                        <TextField
+                            name="detail"
+                            value={detail}
                             label="詳細"
                             fullWidth={true}
                             onChange={e => setDetail(e.target.value)} />
@@ -56,6 +63,7 @@ export const Add = () => {
                     <Grid item xs={12} className={classes.formGrid}>
                         <TextField
                             name="dueDate"
+                            value={dueDate}
                             label="期限"
                             type="date"
                             InputLabelProps={{
@@ -74,6 +82,7 @@ export const Add = () => {
                     </Grid>
                 </Grid>
             </form>
+            <Link to="/">トップ画面へ</Link>
         </div >
     )
 }
